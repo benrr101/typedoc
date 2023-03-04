@@ -11,6 +11,7 @@ import { filterMap, zip } from "../../utils/array";
 import { Component, ConverterComponent } from "../components";
 import type { Context } from "../context";
 import { Converter } from "../converter";
+import { Comment } from "../../models";
 
 /**
  * A plugin that detects interface implementations of functions and
@@ -500,7 +501,11 @@ function copyComment(target: Reflection, source: Reflection) {
         return;
     }
 
-    target.comment = source.comment.clone();
+    target.comment ??= new Comment();
+    target.comment.removeTags("@inheritDoc");
+    target.comment.summary = Comment.cloneDisplayParts(
+        source.comment.summary
+    );
 
     if (
         target instanceof DeclarationReflection &&

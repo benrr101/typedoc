@@ -16,6 +16,7 @@ const types_1 = require("../../models/types");
 const array_1 = require("../../utils/array");
 const components_1 = require("../components");
 const converter_1 = require("../converter");
+const models_1 = require("../../models");
 /**
  * A plugin that detects interface implementations of functions and
  * properties on classes and links them.
@@ -319,7 +320,9 @@ function copyComment(target, source) {
     if (!source.comment) {
         return;
     }
-    target.comment = source.comment.clone();
+    target.comment ?? (target.comment = new models_1.Comment());
+    target.comment.removeTags("@inheritDoc");
+    target.comment.summary = models_1.Comment.cloneDisplayParts(source.comment.summary);
     if (target instanceof index_1.DeclarationReflection &&
         source instanceof index_1.DeclarationReflection) {
         for (const [tt, ts] of (0, array_1.zip)(target.typeParameters || [], source.typeParameters || [])) {
