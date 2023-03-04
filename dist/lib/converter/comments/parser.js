@@ -117,9 +117,6 @@ function postProcessComment(comment, warning) {
         comment.summary.some((part) => part.kind !== "inline-tag" && /\S/.test(part.text))) {
         warning("Content in the summary section will be overwritten by the @inheritDoc tag");
     }
-    if ((inlineInheritDoc.length || inheritDoc.length) && remarks.length) {
-        warning("Content in the @remarks block will be overwritten by the @inheritDoc tag");
-    }
 }
 const aliasedTags = new Map([["@return", "@returns"]]);
 function blockTag(comment, lexer, config, warning) {
