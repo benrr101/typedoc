@@ -141,14 +141,6 @@ export class InheritDocPlugin extends ConverterComponent {
         target.comment.summary = Comment.cloneDisplayParts(
             source.comment.summary
         );
-        const remarks = source.comment.getTag("@remarks");
-        if (remarks) {
-            target.comment.blockTags.unshift(remarks.clone());
-        }
-        const returns = source.comment.getTag("@returns");
-        if (returns) {
-            target.comment.blockTags.push(returns.clone());
-        }
 
         if (
             source instanceof SignatureReflection &&
