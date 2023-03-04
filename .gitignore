@@ -12,7 +12,9 @@ yarn-error.log
 /src/test/renderer/testProject/json.json
 **/node_modules/
 /coverage/
-/dist/
+# ALlow build to be published for consumption by node-taglib-sharp
+#/dist/
+/dist/test
 /docs
 
 typedoc*.tgz
@@ -22,6 +24,6 @@ src/test/renderer/specs/assets/*
 src/test/renderer/specs/specs.json
 
 # Built theme JS
-static/main.js
+#static/main.js
 
 /example/docs/
